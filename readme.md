@@ -39,7 +39,7 @@ Once you have the prequisites ready, you can use following steps to create a new
 2. Type this command and press enter: `Invoke-Plaster -TemplatePath 'C:\Code\PowerShell-Lambda-Template' -DestinationPath C:\Code\MyHelloWorldLambda`
 3. You will be prompted for Lambda name, S3 bucket name. Please provide answers. (Hint: Press `Ctrl-C` to stop)
 4. You should see output similar to the following:
-  - ![example](.\Content\Example.PNG)
+  - ![example](./Content/Example.PNG)
 5. Let's go to the `C:\Code` folder. It will have following files and structures. The descriptions is in the brackets.
     ```
     C:\Code
