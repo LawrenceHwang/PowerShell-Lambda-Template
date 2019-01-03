@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  [[LambdaName]]Function:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: '[[LambdaName]]::[[LambdaName]].Bootstrap::ExecuteFunction'
+      Runtime: dotnetcore2.1
+      CodeUri: [[LambdaName]].zip
+      MemorySize: 512
+      Timeout: 60
+      Role:
+        'Fn::GetAtt':
+          - LambdaRole
+          - Arn
+      Environment:
+        Variables: {}
+  LambdaRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+      Policies:
+        -
+          PolicyName:
+            'Fn::Sub': 'LambdaPolicy-${AWS::StackName}'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              -
+                Action:
+                  - 's3:GetObject'
+                  - 's3:ListBucket'
+                Effect: Allow
+                Resource: '*'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          -
+            Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+Outputs:
+  LambdaName:
+    Description: Name of the Lambda to validate json input
+    Value:
+      Ref: [[LambdaName]]Function
+    Export:
+      Name:
+        'Fn::Sub': '${AWS::StackName}-[[LambdaName]]Function'

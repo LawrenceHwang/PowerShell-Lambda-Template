@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest schemaVersion="1.1" templateType="Project"
+  xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>PowerShell-Lambda-Template</name>
+    <id>3bf63029-d16e-4aa5-9073-5cfe51e06266</id>
+    <version>1.0.0</version>
+    <title>PowerShell-Lambda-Template</title>
+    <description>A PowerShell Plaster template to scaffolding a new PowerShell Lambda function with AWS SAM model.</description>
+    <author>Lawrence Hwang (Twitter: CPoweredLion@)</author>
+    <tags>aws, PowerShell, Lambda</tags>
+  </metadata>
+  <parameters>
+    <parameter  name = 'LambdaName'
+                type = 'text'
+                prompt = 'The name of your Lambda function/ application'/>
+    <parameter  name = 'S3BucketName'
+                type = 'text'
+                prompt = 'The name of the pre created S3 bucket for storing Lambda code.'/>
+  </parameters>
+  <content>
+    <message>
+    Scaffolding your new PowerShell Lambda project '$PLASTER_PARAM_LambdaName}'.
+  </message>
+  <file source = 'tests\*'
+      destination = '${PLASTER_PARAM_LambdaName}\tests\'/>
+    <file source = 'PowerShellLambda\Deploy.ps1'
+      destination = '${PLASTER_PARAM_LambdaName}\Deploy.ps1'/>
+    <file source = 'PowerShellLambda\PowerShellLambda.ps1'
+      destination = '${PLASTER_PARAM_LambdaName}\${PLASTER_PARAM_LambdaName}.ps1'/>
+    <file source = 'PowerShellLambda\serverless.template'
+      destination = '${PLASTER_PARAM_LambdaName}\${PLASTER_PARAM_LambdaName}-serverless.template'/>
+    <modify path='${PLASTER_PARAM_LambdaName}\Deploy.ps1' encoding='UTF8'>
+      <replace>
+        <original>\[\[LambdaName\]\]</original>
+        <substitute expand='true'>$PLASTER_PARAM_LambdaName</substitute>
+      </replace>
+    </modify>
+    <modify path='${PLASTER_PARAM_LambdaName}\Deploy.ps1' encoding='UTF8'>
+      <replace>
+        <original>\[\[S3BucketName\]\]</original>
+        <substitute expand='true'>$PLASTER_PARAM_S3BucketName</substitute>
+      </replace>
+    </modify>
+    <modify path='${PLASTER_PARAM_LambdaName}\${PLASTER_PARAM_LambdaName}-serverless.template' encoding='UTF8'>
+      <replace>
+        <original>\[\[LambdaName\]\]</original>
+        <substitute expand='true'>$PLASTER_PARAM_LambdaName</substitute>
+      </replace>
+    </modify>
+    <requireModule name = 'AWSPowerShell.NetCore'
+                  minimumVersion = '3.3.390.0'
+                  message = 'You need AWSPowerShell.NetCore module for PowerShell Lambda. Please install the modle from PSGallery.'/>
+    <requireModule name = 'AWSLambdaPSCore'
+                  minimumVersion = '1.1.0.0'
+                  message = 'You need AWSLambdaPSCore module for PowerShell Lambda. Please install the modle from PSGallery.'/>
+  <message>
+    Your new PowerShell Lambda project '$PLASTER_PARAM_LambdaName' has been created.
+  </message>
+  </content>
+
+</plasterManifest>
