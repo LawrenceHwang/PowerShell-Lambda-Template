@@ -1,5 +1,5 @@
 #region notes
-# The prequisites are:
+# The prerequisites are:
 # .Net Core SDK
 # AWS CLI
 # PowerShell Core 6
@@ -9,7 +9,7 @@
 # Pre-created S3 bucket in the target account.
 # Pre-configured AWSPowerShell.NetCore/ AWS CLI credentials
 #
-# **Note: This will over write the existing default profile for AWS CLI.**
+# **Note: This will overwrite the existing default profile for AWS CLI.**
 #
 # In VSCode, run this file using Ctrl+F5. If you use F8 or select and run, this won't work.
 #endregion notes
