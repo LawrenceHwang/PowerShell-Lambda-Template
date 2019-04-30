@@ -8,7 +8,7 @@ This template can provide a PowerShell developer with a faster feedback loop whe
 
 Quickly iterate development of PowerShell Lambda functions using this template workflow.
 
-This workflow uses AWS Serverless Application Module (SAM) template to describe the Lambda function as an application. The template can then be transformed, deployed, updated, and torn down quickly via command line, enabling the developer to observe and receive feedback quickly.
+This workflow uses AWS Serverless Application Model (SAM) template to describe the Lambda function as an application. The template can then be transformed, deployed, updated, and torn down quickly via command line, enabling the developer to observe and receive feedback quickly.
 
 ## File Content
 
@@ -49,13 +49,36 @@ Once you have the prerequisites ready, use the following steps to create a new P
     ``` powershell
     Invoke-Plaster -TemplatePath 'C:\Code\PowerShell-Lambda-Template' -DestinationPath C:\Code\MyHelloWorldLambda
     ```
-3. You will be prompted for a Lambda name, S3 bucket name. Please provide answers.
+3. You will be prompted for a Lambda name, target AWS region and S3 bucket name. Please provide them.
 
     *(Hint: Press `Ctrl-C` to stop)*
 4. You should see output similar to the following:
 
     ![example](./Content/Example.PNG)
 5. Navigate to the `C:\Code` folder. It will contain the following folder and file structure. The descriptions are in the brackets.
+
+```
+C:\CODE\MYHELLOWORLDLAMBDA (from the -Destination of Invoke-Plaster)
+\---HelloWorld (The lambda name)
+    |   readme.txt
+    |
+    +---.vscode
+    |       tasks.json
+    |
+    +---artifact
+    |       .gitignore (The git ignore prevents the generated artifacts getting tracked.)
+    |
+    +---src
+    |       HelloWorld-serverless.template (SAM template)
+    |       HelloWorld.ps1 (The actual PowerShell Lambda code)
+    |       HelloWorld.tests.ps1 (Write tests for your PowerShell code)
+    |
+    \---tools
+            DeployLambda.ps1 (The PowerShell Script for deploying the lamnda - SAM template)
+            InvokeLambda.ps1 (The PowerShell Script for invoking the lambda)
+            psl_config.json (The configuration file storing the lamba/ s3/ AWS region information)
+```
+
     ```
     C:\Code
     \---MyHelloWorldLambda (from the -Destination of Invoke-Plaster)
@@ -67,7 +90,7 @@ Once you have the prerequisites ready, use the following steps to create a new P
 6. Open the `HelloWorld` folder in Visual Studio Code.
 7. The `HelloWorld.ps1` contains the basic PowerShell Code to output environmental variables.
 8. Open the `Deploy.ps1` file
-9. Make sure you have `PowerShell 6.x` selected on the bottom right. This ensures we are using PowerShell Core 6 in the VSCode's Integrated Console.
+9.  Make sure you have `PowerShell 6.x` selected on the bottom right. This ensures we are using PowerShell Core 6 in the VSCode's Integrated Console.
 10. Press `Ctrl + F5` to deploy the default Lambda to the AWS account (using default region).
 
     ***NOTE: make sure you have the AWS credential configured for both AWS PowerShell and AWS CLI.***
