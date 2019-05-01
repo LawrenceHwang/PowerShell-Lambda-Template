@@ -93,7 +93,7 @@ if (-Not (Get-Module $module))
 # Setting up the credential for both AWSPowerShell.NetCore and the aws cli
 if ($PSEdition -eq 'Desktop')
 {
-    throw 'This deployment script does not work with non PS Core version'
+    throw 'This deployment script does not work with PowerShell Desktop version (v5.1..etc)'
 }
 elseif ($PSEdition -eq 'Core')
 {
@@ -107,24 +107,6 @@ elseif ($PSEdition -eq 'Core')
     }
 }
 #endregion parameters
-
-try
-{
-    $OriginErrorActionPreference = $ErrorActionPreference
-    $ErrorActionPreference = 'Stop'
-
-    # Check up credentials for awspowershell and aws cli.
-    #
-    #
-    #
-    $ErrorActionPreference = $OriginErrorActionPreference
-}
-catch
-{
-    Show-ErrorDetail
-    $ErrorActionPreference = $OriginErrorActionPreference
-    throw
-}
 
 # Packging the AWS PowerShell Lamda package.
 New-AWSPowerShellLambdaPackage -ScriptPath $ScriptPath -OutputPackage $ArtifactPath -PowerShellSdkVersion ($psversiontable.psversion.ToString())

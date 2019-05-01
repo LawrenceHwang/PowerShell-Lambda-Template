@@ -73,19 +73,10 @@ if (-Not (Get-Module $module)) {
     Import-Module $module
 }
 # Setting up the credential for both AWSPowerShell.NetCore and the aws cli
-if ($PSEdition -eq 'Desktop') {
-    throw 'This deployment script does not work with non PS Core version'
-}
-elseif ($PSEdition -eq 'Core') {
-    if ($IsWindows) {
-        $AWSCredProfileLocation = "$env:USERPROFILE\.aws\credentials"
-    }
-    else {
-        $AWSCredProfileLocation = '~/.aws/credentials'
-    }
-}
 Set-DefaultAWSRegion -Region $AWSRegion -Verbose
 #endregion parameters
+
+
 if ($lambdaname.Length -le 20) {
     $Result = Get-LMFunctionList | Where-Object FunctionName -like "$lambdaname*" | Invoke-LMFunction -Verbose
 }
