@@ -3,7 +3,7 @@
   xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
   <metadata>
     <name>PowerShell-Lambda-Template</name>
-    <id>3bf63029-d16e-4aa5-9073-5cfe51e06266</id>
+    <id>8c3b627d-4277-46fe-bfa7-4ff703730127</id>
     <version>1.2.0</version>
     <title>PowerShell-Lambda-Template</title>
     <description>A PowerShell Plaster template for scaffolding a new PowerShell Lambda function with AWS SAM.</description>
