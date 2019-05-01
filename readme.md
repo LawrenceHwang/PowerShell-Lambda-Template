@@ -6,7 +6,7 @@ This template can provide a PowerShell developer with a faster feedback loop whe
 
 ## Description
 
-This workflow/ template leverages AWS Serverless Application Model (SAM) template to describe the Lambda function as an application. The template can then be transformed, deployed, updated, and torn down quickly via command line, enabling the developer to observe and receive feedback quickly.
+This workflow/ template leverages [AWS Serverless Application Model (SAM) template](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) to describe the Lambda function as an application. The template can then be transformed, deployed, updated, and torn down quickly via command line, enabling the developer to observe and receive feedback quickly.
 
 ## File Content
 
